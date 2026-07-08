@@ -7,17 +7,12 @@ export async function handleCompanyOperation(
 	operation: string,
 	i: number,
 ): Promise<IDataObject | IDataObject[]> {
-	if (operation === 'create') {
-		return companyCreate.call(this, i);
-	} else if (operation === 'get') {
-		return companyGet.call(this, i);
-	} else if (operation === 'getAll') {
-		return companyGetAll.call(this);
-	} else if (operation === 'update') {
-		return companyUpdate.call(this, i);
-	} else if (operation === 'delete') {
-		return companyDelete.call(this, i);
-	}
+	if (operation === 'create') return companyCreate.call(this, i);
+	if (operation === 'get') return companyGet.call(this, i);
+	if (operation === 'getAll') return companyGetAll.call(this);
+	if (operation === 'update') return companyUpdate.call(this, i);
+	if (operation === 'delete') return companyDelete.call(this, i);
+	if (operation === 'upsert') return companyUpsert.call(this, i);
 	throw new Error(`Unsupported operation: ${operation}`);
 }
 
@@ -164,4 +159,55 @@ async function companyDelete(this: IExecuteFunctions, i: number): Promise<IDataO
 	const response = await twentyApiRequest.call(this, 'DELETE', 'companies', undefined, undefined, companyId);
 	const data = response.data as IDataObject;
 	return (data.deleteCompany || { id: companyId, deleted: true }) as IDataObject;
+}
+
+async function companyUpsert(this: IExecuteFunctions, i: number): Promise<IDataObject> {
+	const matchField = this.getNodeParameter('matchField', i) as string;
+	const matchValue = this.getNodeParameter('matchValue', i) as string;
+	const name = this.getNodeParameter('name', i) as string;
+	const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
+
+	const comparator = matchField.includes('.') ? 'eq' : 'ilike';
+	const filterValue = comparator === 'ilike' ? matchValue : matchValue;
+	const filters: ITwentyFilter[] = [{ field: matchField, comparator, value: filterValue }];
+	const filterString = buildFilterString(filters);
+
+	const searchResponse = await twentyApiRequest.call(this, 'GET', 'companies', undefined, {
+		filter: filterString,
+		limit: 1,
+	});
+
+	const searchData = searchResponse.data as IDataObject;
+	const existing = searchData.companies as IDataObject[] | undefined;
+
+	const body: IDataObject = { name };
+
+	if (additionalFields.domainUrl) {
+		body.domainName = { primaryLinkUrl: additionalFields.domainUrl, primaryLinkLabel: '' };
+	}
+	if (additionalFields.linkedinUrl) {
+		body.linkedinLink = { primaryLinkUrl: additionalFields.linkedinUrl, primaryLinkLabel: '' };
+	}
+	const addressFields = ['addressStreet1', 'addressStreet2', 'addressCity', 'addressState', 'addressPostcode', 'addressCountry'];
+	const address: IDataObject = {};
+	let hasAddress = false;
+	for (const field of addressFields) {
+		if (additionalFields[field]) { address[field] = additionalFields[field]; hasAddress = true; }
+	}
+	if (hasAddress) body.address = address;
+	if (additionalFields.annualRevenueMicros || additionalFields.currencyCode) {
+		body.annualRevenue = { amountMicros: additionalFields.annualRevenueMicros || null, currencyCode: additionalFields.currencyCode || null };
+	}
+	if (additionalFields.accountOwnerId) body.accountOwnerId = additionalFields.accountOwnerId;
+
+	if (existing && existing.length > 0) {
+		const existingId = (existing[0] as IDataObject).id as string;
+		const response = await twentyApiRequest.call(this, 'PATCH', 'companies', body, undefined, existingId);
+		const data = response.data as IDataObject;
+		return (data.updateCompany || response) as IDataObject;
+	} else {
+		const response = await twentyApiRequest.call(this, 'POST', 'companies', body);
+		const data = response.data as IDataObject;
+		return (data.createCompany || data.createCompanies) as IDataObject;
+	}
 }

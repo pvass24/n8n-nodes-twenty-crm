@@ -11,6 +11,7 @@ export const personOperations: INodeProperties[] = [
 		displayOptions: { show: { resource: [resource] } },
 		options: [
 			{ name: 'Create', value: 'create', description: 'Create a person', action: 'Create a person' },
+			{ name: 'Create or Update', value: 'upsert', description: 'Create a new person, or update if already exists', action: 'Create or update a person' },
 			{ name: 'Delete', value: 'delete', description: 'Delete a person', action: 'Delete a person' },
 			{ name: 'Get', value: 'get', description: 'Get a person by ID', action: 'Get a person' },
 			{ name: 'Get Many', value: 'getAll', description: 'Get many people', action: 'Get many people' },
@@ -31,6 +32,32 @@ export const personFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
+	//         person: upsert
+	// ----------------------------------
+	{
+		displayName: 'Match Field',
+		name: 'matchField',
+		type: 'options',
+		required: true,
+		default: 'emails.primaryEmail',
+		displayOptions: { show: { resource: [resource], operation: ['upsert'] } },
+		options: [
+			{ name: 'Email', value: 'emails.primaryEmail' },
+			{ name: 'Phone', value: 'phones.primaryPhoneNumber' },
+			{ name: 'ID', value: 'id' },
+		],
+		description: 'Field to match on when checking if person exists',
+	},
+	{
+		displayName: 'Match Value',
+		name: 'matchValue',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: { show: { resource: [resource], operation: ['upsert'] } },
+	},
+
+	// ----------------------------------
 	//         person: create
 	// ----------------------------------
 	{
@@ -39,7 +66,7 @@ export const personFields: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		displayOptions: { show: { resource: [resource], operation: ['create'] } },
+		displayOptions: { show: { resource: [resource], operation: ['create', 'upsert'] } },
 	},
 	{
 		displayName: 'Last Name',
@@ -47,7 +74,7 @@ export const personFields: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		displayOptions: { show: { resource: [resource], operation: ['create'] } },
+		displayOptions: { show: { resource: [resource], operation: ['create', 'upsert'] } },
 	},
 	{
 		displayName: 'Additional Fields',
@@ -55,7 +82,7 @@ export const personFields: INodeProperties[] = [
 		type: 'collection',
 		placeholder: 'Add Field',
 		default: {},
-		displayOptions: { show: { resource: [resource], operation: ['create'] } },
+		displayOptions: { show: { resource: [resource], operation: ['create', 'upsert'] } },
 		options: [
 			{ displayName: 'Email', name: 'email', type: 'string', default: '', placeholder: 'name@example.com' },
 			{ displayName: 'Phone Number', name: 'phoneNumber', type: 'string', default: '' },

@@ -16,6 +16,7 @@ import { noteOperations, noteFields } from './resources/note/note.description';
 import { handleNoteOperation } from './resources/note/note.handler';
 import { taskOperations, taskFields } from './resources/task/task.description';
 import { handleTaskOperation } from './resources/task/task.handler';
+import { searchCompanies, searchPeople, searchOpportunities } from './shared/listSearch';
 
 export class TwentyCrm implements INodeType {
 	description: INodeTypeDescription = {
@@ -64,6 +65,14 @@ export class TwentyCrm implements INodeType {
 			...taskOperations,
 			...taskFields,
 		],
+	};
+
+	methods = {
+		listSearch: {
+			searchCompanies,
+			searchPeople,
+			searchOpportunities,
+		},
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {

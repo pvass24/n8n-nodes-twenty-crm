@@ -17,6 +17,12 @@ export const companyOperations: INodeProperties[] = [
 				action: 'Create a company',
 			},
 			{
+				name: 'Create or Update',
+				value: 'upsert',
+				description: 'Create a new company, or update if it already exists',
+				action: 'Create or update a company',
+			},
+			{
 				name: 'Delete',
 				value: 'delete',
 				description: 'Delete a company',
@@ -60,6 +66,33 @@ export const companyFields: INodeProperties[] = [
 	},
 
 	// ----------------------------------
+	//         company: upsert
+	// ----------------------------------
+	{
+		displayName: 'Match Field',
+		name: 'matchField',
+		type: 'options',
+		required: true,
+		default: 'name',
+		displayOptions: { show: { resource: [resource], operation: ['upsert'] } },
+		options: [
+			{ name: 'Name', value: 'name' },
+			{ name: 'Domain URL', value: 'domainName.primaryLinkUrl' },
+			{ name: 'ID', value: 'id' },
+		],
+		description: 'Field to match on when checking if record exists',
+	},
+	{
+		displayName: 'Match Value',
+		name: 'matchValue',
+		type: 'string',
+		required: true,
+		default: '',
+		displayOptions: { show: { resource: [resource], operation: ['upsert'] } },
+		description: 'Value to match against',
+	},
+
+	// ----------------------------------
 	//         company: create
 	// ----------------------------------
 	{
@@ -68,7 +101,7 @@ export const companyFields: INodeProperties[] = [
 		type: 'string',
 		required: true,
 		default: '',
-		displayOptions: { show: { resource: [resource], operation: ['create'] } },
+		displayOptions: { show: { resource: [resource], operation: ['create', 'upsert'] } },
 		description: 'The company name',
 	},
 	{
@@ -77,7 +110,7 @@ export const companyFields: INodeProperties[] = [
 		type: 'collection',
 		placeholder: 'Add Field',
 		default: {},
-		displayOptions: { show: { resource: [resource], operation: ['create'] } },
+		displayOptions: { show: { resource: [resource], operation: ['create', 'upsert'] } },
 		options: [
 			{
 				displayName: 'Domain URL',
