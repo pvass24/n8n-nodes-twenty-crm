@@ -16,7 +16,19 @@ import { noteOperations, noteFields } from './resources/note/note.description';
 import { handleNoteOperation } from './resources/note/note.handler';
 import { taskOperations, taskFields } from './resources/task/task.description';
 import { handleTaskOperation } from './resources/task/task.handler';
-import { searchCompanies, searchPeople, searchOpportunities } from './shared/listSearch';
+import { searchCompanies, searchPeople, searchOpportunities, searchObjects } from './shared/listSearch';
+import { customObjectOperations, customObjectFields } from './resources/customObject/customObject.description';
+import { handleCustomObjectOperation } from './resources/customObject/customObject.handler';
+import { searchOperations, searchFields } from './resources/search/search.description';
+import { handleSearchOperation } from './resources/search/search.handler';
+import { workspaceMemberOperations, workspaceMemberFields } from './resources/workspaceMember/workspaceMember.description';
+import { handleWorkspaceMemberOperation } from './resources/workspaceMember/workspaceMember.handler';
+import { noteTargetOperations, noteTargetFields } from './resources/noteTarget/noteTarget.description';
+import { handleNoteTargetOperation } from './resources/noteTarget/noteTarget.handler';
+import { taskTargetOperations, taskTargetFields } from './resources/taskTarget/taskTarget.description';
+import { handleTaskTargetOperation } from './resources/taskTarget/taskTarget.handler';
+import { attachmentOperations, attachmentFields } from './resources/attachment/attachment.description';
+import { handleAttachmentOperation } from './resources/attachment/attachment.handler';
 
 export class TwentyCrm implements INodeType {
 	description: INodeTypeDescription = {
@@ -46,24 +58,42 @@ export class TwentyCrm implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
+					{ name: 'Attachment', value: 'attachment' },
 					{ name: 'Company', value: 'company' },
+					{ name: 'Custom Object', value: 'customObject' },
 					{ name: 'Note', value: 'note' },
+					{ name: 'Note Target', value: 'noteTarget' },
 					{ name: 'Opportunity', value: 'opportunity' },
 					{ name: 'Person', value: 'person' },
+					{ name: 'Search', value: 'search' },
 					{ name: 'Task', value: 'task' },
+					{ name: 'Task Target', value: 'taskTarget' },
+					{ name: 'Workspace Member', value: 'workspaceMember' },
 				],
 				default: 'company',
 			},
+			...attachmentOperations,
+			...attachmentFields,
 			...companyOperations,
 			...companyFields,
-			...personOperations,
-			...personFields,
+			...customObjectOperations,
+			...customObjectFields,
 			...noteOperations,
 			...noteFields,
+			...noteTargetOperations,
+			...noteTargetFields,
 			...opportunityOperations,
 			...opportunityFields,
+			...personOperations,
+			...personFields,
+			...searchOperations,
+			...searchFields,
 			...taskOperations,
 			...taskFields,
+			...taskTargetOperations,
+			...taskTargetFields,
+			...workspaceMemberOperations,
+			...workspaceMemberFields,
 		],
 	};
 
@@ -72,6 +102,7 @@ export class TwentyCrm implements INodeType {
 			searchCompanies,
 			searchPeople,
 			searchOpportunities,
+			searchObjects,
 		},
 	};
 
@@ -87,20 +118,38 @@ export class TwentyCrm implements INodeType {
 				let result: unknown;
 
 				switch (resource) {
+					case 'attachment':
+						result = await handleAttachmentOperation.call(this, operation, i);
+						break;
 					case 'company':
 						result = await handleCompanyOperation.call(this, operation, i);
 						break;
-					case 'person':
-						result = await handlePersonOperation.call(this, operation, i);
-						break;
-					case 'opportunity':
-						result = await handleOpportunityOperation.call(this, operation, i);
+					case 'customObject':
+						result = await handleCustomObjectOperation.call(this, operation, i);
 						break;
 					case 'note':
 						result = await handleNoteOperation.call(this, operation, i);
 						break;
+					case 'noteTarget':
+						result = await handleNoteTargetOperation.call(this, operation, i);
+						break;
+					case 'opportunity':
+						result = await handleOpportunityOperation.call(this, operation, i);
+						break;
+					case 'person':
+						result = await handlePersonOperation.call(this, operation, i);
+						break;
+					case 'search':
+						result = await handleSearchOperation.call(this, operation, i);
+						break;
 					case 'task':
 						result = await handleTaskOperation.call(this, operation, i);
+						break;
+					case 'taskTarget':
+						result = await handleTaskTargetOperation.call(this, operation, i);
+						break;
+					case 'workspaceMember':
+						result = await handleWorkspaceMemberOperation.call(this, operation, i);
 						break;
 					default:
 						throw new Error(`Unknown resource: ${resource}`);
