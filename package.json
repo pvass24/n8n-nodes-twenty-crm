@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-twentycrm-pro",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "n8n community node for Twenty CRM — full CRUD with pagination, filtering, and search",
 	"license": "MIT",
 	"homepage": "https://github.com/pvass24/n8n-nodes-twenty-crm",
@@ -19,7 +19,7 @@
 		"url": "https://github.com/pvass24/n8n-nodes-twenty-crm.git"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc && cp nodes/TwentyCrm/twenty.svg dist/nodes/TwentyCrm/twenty.svg",
 		"build:watch": "tsc --watch",
 		"dev": "tsc --watch",
 		"lint": "eslint . --ext .ts",
@@ -33,7 +33,8 @@
 	},
 	"files": [
 		"dist",
-		"icons"
+		"icons",
+		"nodes/**/*.svg"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,

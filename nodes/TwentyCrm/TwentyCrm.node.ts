@@ -21,7 +21,7 @@ export class TwentyCrm implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Twenty CRM',
 		name: 'twentyCrm',
-		icon: 'file:../../icons/twenty.svg',
+		icon: 'file:twenty.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
