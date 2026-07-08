@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-twentycrm-pro",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "n8n community node for Twenty CRM — full CRUD with pagination, filtering, and search",
 	"license": "MIT",
 	"homepage": "https://github.com/pvass24/n8n-nodes-twenty-crm",
@@ -32,7 +32,8 @@
 		"prepublishOnly": "npm run build"
 	},
 	"files": [
-		"dist"
+		"dist",
+		"icons"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
