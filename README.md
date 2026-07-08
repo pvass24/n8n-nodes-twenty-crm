@@ -1,7 +1,7 @@
 # n8n-nodes-twenty-crm
 
-[![npm version](https://img.shields.io/npm/v/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/n8n-nodes-twenty-crm)
-[![npm downloads](https://img.shields.io/npm/dm/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/n8n-nodes-twenty-crm)
+[![npm version](https://img.shields.io/npm/v/@pvass24/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/@pvass24/n8n-nodes-twenty-crm)
+[![npm downloads](https://img.shields.io/npm/dm/@pvass24/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/@pvass24/n8n-nodes-twenty-crm)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![n8n community node](https://img.shields.io/badge/n8n-community%20node-ff6d5a)](https://docs.n8n.io/integrations/community-nodes/)
 
@@ -33,14 +33,14 @@ Full CRUD operations with **cursor pagination**, **advanced filtering**, **compo
 
 1. Go to **Settings** → **Community Nodes**
 2. Select **Install a community node**
-3. Enter: `n8n-nodes-twenty-crm`
+3. Enter: `@pvass24/n8n-nodes-twenty-crm`
 4. Click **Install**
 
 ### Via npm (Self-hosted)
 
 ```bash
 cd ~/.n8n/custom
-npm install n8n-nodes-twenty-crm
+npm install @pvass24/n8n-nodes-twenty-crm
 ```
 
 Then restart n8n.
