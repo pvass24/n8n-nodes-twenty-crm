@@ -1,5 +1,5 @@
 {
-	"name": "@pvass24/n8n-nodes-twenty-crm",
+	"name": "n8n-nodes-twentycrm-pro",
 	"version": "1.0.0",
 	"description": "n8n community node for Twenty CRM — full CRUD with pagination, filtering, and search",
 	"license": "MIT",

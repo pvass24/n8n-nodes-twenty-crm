@@ -1,7 +1,7 @@
-# n8n-nodes-twenty-crm
+# n8n-nodes-twentycrm-pro
 
-[![npm version](https://img.shields.io/npm/v/@pvass24/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/@pvass24/n8n-nodes-twenty-crm)
-[![npm downloads](https://img.shields.io/npm/dm/@pvass24/n8n-nodes-twenty-crm.svg)](https://www.npmjs.com/package/@pvass24/n8n-nodes-twenty-crm)
+[![npm version](https://img.shields.io/npm/v/n8n-nodes-twentycrm-pro.svg)](https://www.npmjs.com/package/n8n-nodes-twentycrm-pro)
+[![npm downloads](https://img.shields.io/npm/dm/n8n-nodes-twentycrm-pro.svg)](https://www.npmjs.com/package/n8n-nodes-twentycrm-pro)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![n8n community node](https://img.shields.io/badge/n8n-community%20node-ff6d5a)](https://docs.n8n.io/integrations/community-nodes/)
 
@@ -13,7 +13,7 @@ Full CRUD operations with **cursor pagination**, **advanced filtering**, **compo
 
 ## Why This Node?
 
-| Feature | n8n-nodes-twenty-crm | Other Twenty nodes |
+| Feature | n8n-nodes-twentycrm-pro | Other Twenty nodes |
 |---------|---------------------|-------------------|
 | Pagination (Return All) | **Full cursor-based** | None (max 60 results) |
 | Filtering | **Built-in filter UI** | Manual query strings |
@@ -33,14 +33,14 @@ Full CRUD operations with **cursor pagination**, **advanced filtering**, **compo
 
 1. Go to **Settings** → **Community Nodes**
 2. Select **Install a community node**
-3. Enter: `@pvass24/n8n-nodes-twenty-crm`
+3. Enter: `n8n-nodes-twentycrm-pro`
 4. Click **Install**
 
 ### Via npm (Self-hosted)
 
 ```bash
 cd ~/.n8n/custom
-npm install @pvass24/n8n-nodes-twenty-crm
+npm install n8n-nodes-twentycrm-pro
 ```
 
 Then restart n8n.
@@ -230,8 +230,8 @@ Works with both [Twenty Cloud](https://twenty.com) and self-hosted instances.
 ## Development
 
 ```bash
-git clone https://github.com/pvass24/n8n-nodes-twenty-crm.git
-cd n8n-nodes-twenty-crm
+git clone https://github.com/pvass24/n8n-nodes-twentycrm-pro.git
+cd n8n-nodes-twentycrm-pro
 npm install
 npm run build
 
@@ -294,4 +294,4 @@ Contributions are welcome! Please:
 - [Twenty CRM](https://twenty.com) — The open-source CRM
 - [Twenty REST API Docs](https://twenty.com/developers/rest-api)
 - [n8n Community Nodes](https://docs.n8n.io/integrations/community-nodes/)
-- [Report Issues](https://github.com/pvass24/n8n-nodes-twenty-crm/issues)
+- [Report Issues](https://github.com/pvass24/n8n-nodes-twentycrm-pro/issues)
