@@ -19,7 +19,7 @@ async function noteTargetCreate(this: IExecuteFunctions, i: number): Promise<IDa
 
 	const body: IDataObject = {
 		noteId,
-		[`${targetType}Id`]: targetId,
+		[`target${targetType.charAt(0).toUpperCase() + targetType.slice(1)}Id`]: targetId,
 	};
 
 	const response = await twentyApiRequest.call(this, 'POST', 'noteTargets', body);

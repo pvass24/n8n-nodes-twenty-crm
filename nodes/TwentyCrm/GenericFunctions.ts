@@ -25,12 +25,14 @@ export function buildFilterString(filters: ITwentyFilter[]): string {
 		.join(',');
 }
 
+const NUMERIC_COMPARATORS = ['gt', 'gte', 'lt', 'lte'];
+
 function formatFilterValue(value: string, comparator: string): string {
 	if (NULL_RE.test(value)) return value;
 	if (BOOLEAN_RE.test(value)) return value;
-	if (NUMERIC_RE.test(value)) return value;
 	if (ARRAY_RE.test(value)) return value;
 	if (comparator === 'is') return value;
+	if (NUMERIC_RE.test(value) && NUMERIC_COMPARATORS.includes(comparator)) return value;
 	return `"${value}"`;
 }
 

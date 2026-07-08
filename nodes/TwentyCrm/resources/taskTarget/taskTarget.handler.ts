@@ -19,7 +19,7 @@ async function taskTargetCreate(this: IExecuteFunctions, i: number): Promise<IDa
 
 	const body: IDataObject = {
 		taskId,
-		[`${targetType}Id`]: targetId,
+		[`target${targetType.charAt(0).toUpperCase() + targetType.slice(1)}Id`]: targetId,
 	};
 
 	const response = await twentyApiRequest.call(this, 'POST', 'taskTargets', body);
