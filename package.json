@@ -1,0 +1,61 @@
+{
+	"name": "n8n-nodes-twenty-crm",
+	"version": "1.0.0",
+	"description": "n8n community node for Twenty CRM — full CRUD with pagination, filtering, and search",
+	"license": "MIT",
+	"homepage": "https://github.com/pvass24/n8n-nodes-twenty-crm",
+	"keywords": [
+		"n8n-community-node-package",
+		"twenty",
+		"crm",
+		"twentycrm"
+	],
+	"author": {
+		"name": "Patrick Vassell",
+		"email": "patrick@iampjv.co"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/pvass24/n8n-nodes-twenty-crm.git"
+	},
+	"scripts": {
+		"build": "tsc",
+		"build:watch": "tsc --watch",
+		"dev": "tsc --watch",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint . --ext .ts --fix",
+		"format": "prettier --write \"**/*.{ts,json,md}\"",
+		"format:check": "prettier --check \"**/*.{ts,json,md}\"",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:integration": "vitest run --config vitest.integration.config.ts",
+		"prepublishOnly": "npm run build"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/TwentyCrmApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/TwentyCrm/TwentyCrm.node.js"
+		]
+	},
+	"devDependencies": {
+		"@types/node": "^22.0.0",
+		"@typescript-eslint/eslint-plugin": "^8.0.0",
+		"@typescript-eslint/parser": "^8.0.0",
+		"eslint": "^8.57.1",
+		"eslint-config-prettier": "^10.0.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"n8n-workflow": "*",
+		"prettier": "^3.8.0",
+		"typescript": "^5.9.0",
+		"vitest": "^3.0.0"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}
