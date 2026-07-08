@@ -1,0 +1,17 @@
+{
+	"node": "n8n-nodes-base.twentyCrm",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://twenty.com/developers/rest-api"
+			}
+		]
+	},
+	"alias": ["CRM", "Twenty", "Sales", "Contacts", "Deals", "Pipeline"],
+	"subcategories": {
+		"Sales": ["Contact Management", "Deal Tracking"]
+	}
+}
