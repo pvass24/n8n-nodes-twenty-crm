@@ -19,7 +19,7 @@ async function noteCreate(this: IExecuteFunctions, i: number): Promise<IDataObje
 	const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
 
 	const body: IDataObject = { title };
-	if (additionalFields.body) body.bodyV2 = { blocknote: additionalFields.body };
+	if (additionalFields.body) body.bodyV2 = { blocknote: JSON.stringify([{ type: 'paragraph', content: [{ type: 'text', text: additionalFields.body }] }]) };
 
 	const response = await twentyApiRequest.call(this, 'POST', 'notes', body);
 	const data = response.data as IDataObject;

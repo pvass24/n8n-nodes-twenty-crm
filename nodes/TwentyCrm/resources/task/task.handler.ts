@@ -20,7 +20,7 @@ async function taskCreate(this: IExecuteFunctions, i: number): Promise<IDataObje
 	const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
 
 	const body: IDataObject = { title };
-	if (additionalFields.body) body.bodyV2 = { blocknote: additionalFields.body };
+	if (additionalFields.body) body.bodyV2 = { blocknote: JSON.stringify([{ type: 'paragraph', content: [{ type: 'text', text: additionalFields.body }] }]) };
 	if (additionalFields.dueAt) body.dueAt = additionalFields.dueAt;
 	if (additionalFields.status) body.status = additionalFields.status;
 	if (additionalFields.assigneeId) body.assigneeId = additionalFields.assigneeId;
