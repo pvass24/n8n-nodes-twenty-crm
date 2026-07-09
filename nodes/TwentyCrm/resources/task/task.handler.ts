@@ -20,7 +20,7 @@ async function taskCreate(this: IExecuteFunctions, i: number): Promise<IDataObje
 	const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
 
 	const body: IDataObject = { title };
-	if (additionalFields.body) body.body = additionalFields.body;
+	if (additionalFields.body) body.bodyV2 = { blocknote: additionalFields.body };
 	if (additionalFields.dueAt) body.dueAt = additionalFields.dueAt;
 	if (additionalFields.status) body.status = additionalFields.status;
 	if (additionalFields.assigneeId) body.assigneeId = additionalFields.assigneeId;
@@ -60,7 +60,7 @@ async function taskUpdate(this: IExecuteFunctions, i: number): Promise<IDataObje
 
 	const body: IDataObject = {};
 	if (updateFields.title) body.title = updateFields.title;
-	if (updateFields.body) body.body = updateFields.body;
+	if (updateFields.body) body.bodyV2 = { blocknote: updateFields.body };
 	if (updateFields.dueAt) body.dueAt = updateFields.dueAt;
 	if (updateFields.status) body.status = updateFields.status;
 	if (updateFields.assigneeId) body.assigneeId = updateFields.assigneeId;

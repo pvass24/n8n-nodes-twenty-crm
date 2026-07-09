@@ -19,7 +19,7 @@ async function noteCreate(this: IExecuteFunctions, i: number): Promise<IDataObje
 	const additionalFields = this.getNodeParameter('additionalFields', i) as IDataObject;
 
 	const body: IDataObject = { title };
-	if (additionalFields.body) body.body = additionalFields.body;
+	if (additionalFields.body) body.bodyV2 = { blocknote: additionalFields.body };
 
 	const response = await twentyApiRequest.call(this, 'POST', 'notes', body);
 	const data = response.data as IDataObject;
@@ -45,7 +45,7 @@ async function noteUpdate(this: IExecuteFunctions, i: number): Promise<IDataObje
 
 	const body: IDataObject = {};
 	if (updateFields.title) body.title = updateFields.title;
-	if (updateFields.body) body.body = updateFields.body;
+	if (updateFields.body) body.bodyV2 = { blocknote: updateFields.body };
 
 	const response = await twentyApiRequest.call(this, 'PATCH', 'notes', body, undefined, noteId);
 	const data = response.data as IDataObject;
